@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/sb_ddd_demo?useSSL=false

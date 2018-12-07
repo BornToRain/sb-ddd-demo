@@ -1,4 +1,4 @@
-package org.btr.scaffold.infrastructure.config;
+package org.btr.ddd.demo.infrastructure.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;

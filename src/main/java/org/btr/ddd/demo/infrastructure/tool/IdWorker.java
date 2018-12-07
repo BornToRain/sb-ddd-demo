@@ -1,4 +1,4 @@
-package org.btr.scaffold.infrastructure.tool;
+package org.btr.ddd.demo.infrastructure.tool;
 
 import lombok.Synchronized;
 import lombok.val;

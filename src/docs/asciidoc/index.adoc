@@ -6,3 +6,88 @@ BornToRain;
 :toc: left
 :toclevels: 4
 :sectlinks:
+
+[[apis]]
+1. 接口
+
+[[apis-user]]
+== 1.1 用户接口
+
+[[apis-user-create]]
+=== 1.1.1 创建 /users
+
+==== 请求参数
+include::{snippets}/user-create/request-fields.adoc[]
+
+==== 响应头
+include::{snippets}/user-create/response-headers.adoc[]
+
+==== 示例请求
+include::{snippets}/user-create/curl-request.adoc[]
+
+==== 示例响应1
+include::{snippets}/user-create/http-response.adoc[]
+
+==== 示例响应2
+include::{snippets}/user-create-logic-400/http-response.adoc[]
+
+==== 示例响应3
+include::{snippets}/user-create-business-400/http-response.adoc[]
+
+[[apis-user-info]]
+=== 1.1.2 详情 /users/{id}
+
+==== 请求URI
+include::{snippets}/user-info/path-parameters.adoc[]
+
+==== 响应参数
+include::{snippets}/user-info/response-fields.adoc[]
+
+==== 示例请求
+include::{snippets}/user-info/curl-request.adoc[]
+
+==== 示例响应1
+include::{snippets}/user-info/http-response.adoc[]
+
+==== 示例响应2
+include::{snippets}/user-info-404/http-response.adoc[]
+
+[[apis-user-edit]]
+=== 1.1.3 编辑 /users/{id}
+
+==== 请求URI
+include::{snippets}/user-edit/path-parameters.adoc[]
+
+==== 请求参数
+include::{snippets}/user-edit/request-fields.adoc[]
+
+==== 响应参数
+include::{snippets}/user-edit/response-fields.adoc[]
+
+==== 示例请求
+include::{snippets}/user-edit/curl-request.adoc[]
+
+==== 示例响应1
+include::{snippets}/user-edit/http-response.adoc[]
+
+==== 示例响应2
+include::{snippets}/user-edit-logic-400/http-response.adoc[]
+
+==== 示例响应3
+include::{snippets}/user-edit-business-400/http-response.adoc[]
+
+==== 示例响应4
+include::{snippets}/user-edit-404/http-response.adoc[]
+
+[[apis-user-delete]]
+=== 1.1.4 删除 /users/{id}
+
+==== 请求URI
+include::{snippets}/user-delete/path-parameters.adoc[]
+
+==== 示例请求
+include::{snippets}/user-delete/curl-request.adoc[]
+
+==== 示例响应
+include::{snippets}/user-delete/http-response.adoc[]
+

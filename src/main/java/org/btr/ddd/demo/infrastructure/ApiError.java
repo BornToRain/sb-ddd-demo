@@ -1,4 +1,4 @@
-package org.btr.scaffold.infrastructure;
+package org.btr.ddd.demo.infrastructure;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

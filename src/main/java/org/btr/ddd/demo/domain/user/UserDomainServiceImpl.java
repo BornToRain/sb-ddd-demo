@@ -18,7 +18,7 @@ import static io.vavr.API.Left;
 
 @Component
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PUBLIC, makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserDomainServiceImpl implements UserDomainService
 {
   UserRepository repository;

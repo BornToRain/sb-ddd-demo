@@ -7,6 +7,8 @@ import org.btr.ddd.demo.infrastructure.ApiError;
 import org.btr.ddd.demo.interfaces.dto.user.UserCreate;
 import org.btr.ddd.demo.interfaces.dto.user.UserEdit;
 import org.btr.ddd.demo.interfaces.dto.user.UserInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface UserService
 {
@@ -17,4 +19,6 @@ public interface UserService
   Option<Either<Seq<ApiError>, UserInfo>> edit(String id, UserEdit request);
 
   void delete(String id);
+
+  Page<UserInfo> getList(Pageable pageable);
 }

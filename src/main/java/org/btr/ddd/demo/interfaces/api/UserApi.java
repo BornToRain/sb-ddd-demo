@@ -7,9 +7,14 @@ import lombok.val;
 import org.btr.ddd.demo.application.service.UserService;
 import org.btr.ddd.demo.infrastructure.ApiConstant;
 import org.btr.ddd.demo.infrastructure.tool.Restful;
+import org.btr.ddd.demo.interfaces.assembler.UserAssembler;
 import org.btr.ddd.demo.interfaces.dto.user.UserCreate;
 import org.btr.ddd.demo.interfaces.dto.user.UserEdit;
+import org.btr.ddd.demo.interfaces.dto.user.UserInfo;
 import org.btr.ddd.demo.interfaces.validator.UserLogicValidator;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +30,12 @@ import static io.vavr.Patterns.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(ApiConstant.USER_ENDPOINT)
+@RequestMapping(value = ApiConstant.USER_ENDPOINT,produces = MediaTypes.HAL_JSON_UTF8_VALUE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserApi
 {
-  UserService service;
+  UserService                       service;
+  PagedResourcesAssembler<UserInfo> pageAssembler;
 
   @PostMapping
   public ResponseEntity create(@RequestBody UserCreate request)
@@ -46,14 +52,14 @@ public class UserApi
   @GetMapping("/{id}")
   public ResponseEntity info(@PathVariable String id)
   {
-    return Restful.ok(service.getInfo(id));
+    return Restful.ok(service.getInfo(id).map(UserAssembler::addInfoResource));
   }
 
   @PutMapping("/{id}")
   public ResponseEntity edit(@PathVariable String id, @RequestBody UserEdit request)
   {
     val result = UserLogicValidator.validate(request)
-                   .map(d -> service.edit(id, d));
+        .map(r -> service.edit(id, r).map(e -> e.map(UserAssembler::addEditResource)));
 
     return Match(result).of(
       Case($Left($()), Restful::badRequest),
@@ -69,5 +75,15 @@ public class UserApi
     service.delete(id);
 
     return Restful.noContent();
+  }
+
+  @GetMapping
+  public ResponseEntity list(Pageable pageable)
+  {
+    val result = service.getList(pageable)
+        .map(UserAssembler::addInfoResource);
+
+    return Restful.ok(pageAssembler.toResource(result));
+
   }
 }

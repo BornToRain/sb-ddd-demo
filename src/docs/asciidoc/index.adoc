@@ -40,6 +40,9 @@ include::{snippets}/user-create-business-400/http-response.adoc[]
 ==== 请求URI
 include::{snippets}/user-info/path-parameters.adoc[]
 
+==== 超链接
+include::{snippets}/user-info/links.adoc[]
+
 ==== 响应参数
 include::{snippets}/user-info/response-fields.adoc[]
 
@@ -57,6 +60,9 @@ include::{snippets}/user-info-404/http-response.adoc[]
 
 ==== 请求URI
 include::{snippets}/user-edit/path-parameters.adoc[]
+
+==== 超链接
+include::{snippets}/user-info/links.adoc[]
 
 ==== 请求参数
 include::{snippets}/user-edit/request-fields.adoc[]
@@ -90,4 +96,22 @@ include::{snippets}/user-delete/curl-request.adoc[]
 
 ==== 示例响应
 include::{snippets}/user-delete/http-response.adoc[]
+
+[[apis-user-list]]
+=== 1.1.5 列表 /users{?page,size}
+
+==== 超链接
+include::{snippets}/user-list/links.adoc[]
+
+==== 请求参数
+include::{snippets}/user-list/request-parameters.adoc[]
+
+==== 响应参数
+include::{snippets}/user-list/response-fields.adoc[]
+
+==== 示例请求
+include::{snippets}/user-list/curl-request.adoc[]
+
+==== 示例响应
+include::{snippets}/user-list/http-response.adoc[]
 

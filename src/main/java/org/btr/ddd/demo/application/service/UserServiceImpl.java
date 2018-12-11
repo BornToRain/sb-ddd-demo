@@ -15,6 +15,8 @@ import org.btr.ddd.demo.interfaces.assembler.UserAssembler;
 import org.btr.ddd.demo.interfaces.dto.user.UserCreate;
 import org.btr.ddd.demo.interfaces.dto.user.UserEdit;
 import org.btr.ddd.demo.interfaces.dto.user.UserInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,5 +56,12 @@ public class UserServiceImpl implements UserService
   public void delete(String id)
   {
     repository.deleteById(id);
+  }
+
+  @Override
+  public Page<UserInfo> getList(Pageable pageable)
+  {
+    return repository.findAll(pageable)
+      .map(UserAssembler::toDTO);
   }
 }

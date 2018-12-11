@@ -18,7 +18,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static io.vavr.API.*;
@@ -141,5 +146,26 @@ public class UserServiceImplTest
     service.delete("1");
 
     verify(repository, times(1)).deleteById(anyString());
+  }
+
+  @Test
+  public void getListShouldReturnList() throws Exception
+  {
+    val data1 = new User();
+    data1.setId(IdWorker.getId());
+    data1.setUsername("BornToRain");
+    val data2 = new User();
+    data2.setId(IdWorker.getId());
+    data2.setUsername("BTR");
+    val page     = PageRequest.of(1, 2);
+    val pageable = new PageImpl<>(Arrays.asList(data1, data2), page, 2);
+
+    when(repository.findAll(any(Pageable.class))).thenReturn(pageable);
+
+    val result = service.getList(page);
+
+    Assertions.assertThat(result).isInstanceOf(Page.class);
+    Assertions.assertThat(result.getTotalElements()).isEqualTo(4);
+    Assertions.assertThat(result.getTotalPages()).isEqualTo(2);
   }
 }
